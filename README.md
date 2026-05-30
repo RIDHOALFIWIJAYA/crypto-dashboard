@@ -69,4 +69,4 @@ Proyek ini dibangun dengan fokus pada kemudahan penggunaan dan ketahanan terhada
 Distributed under the MIT License. Lihat `LICENSE` untuk informasi lebih lanjut.
 
 ---
-Built with ❤️ by [Your Name]
+Built with ❤️ by [RIdho Alfi]
