@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .crypto-card {
+    @apply bg-slate-900 border border-slate-800 rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-900/50;
+  }
+  
+  .price-up {
+    @apply text-emerald-500;
+  }
+  
+  .price-down {
+    @apply text-rose-500;
+  }
+
+  .pulse-update {
+    animation: pulse-border 1.5s ease-out;
+  }
+
+  @keyframes pulse-border {
+    0% {
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+  }
+}
