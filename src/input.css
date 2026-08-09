@@ -30,4 +30,17 @@
       box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
     }
   }
+
+  .chart-modal-visible {
+    animation: modal-fade-in 0.2s ease-out;
+  }
+
+  @keyframes modal-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 }

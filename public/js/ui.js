@@ -29,7 +29,7 @@ async function renderDashboard() {
         refreshBtn.classList.add('opacity-50', 'cursor-not-allowed');
         refreshBtn.disabled = true;
 
-        const data = await window.fetchCryptoData();
+        const data = await window.fetchCryptoData(COINS_TO_DISPLAY);
         console.log("Data for UI received:", data);
 
         if (!data || !data.tickers) {
@@ -61,8 +61,13 @@ async function renderDashboard() {
             const fallbackIcon = `https://indodax.com/static/img/coins/${name}.png`;
 
             const card = document.createElement('div');
-            card.className = 'crypto-card group';
-            
+            card.className = 'crypto-card group cursor-pointer';
+            card.dataset.pairKey = pairKey;
+            card.dataset.name = name;
+            card.dataset.icon = iconUrl;
+            card.dataset.price = price;
+            card.dataset.changeClass = priceChangeClass;
+
             if (price !== prevPrice) {
                 card.classList.add('pulse-update');
                 setTimeout(() => card.classList.remove('pulse-update'), 1500);
@@ -105,7 +110,6 @@ async function renderDashboard() {
         }
 
         lastUpdateEl.textContent = `Last updated: ${new Date().toLocaleTimeString()}`;
-
     } catch (error) {
         console.error("UI Render Error:", error);
         cryptoContainer.innerHTML = `
@@ -125,3 +129,16 @@ async function renderDashboard() {
 renderDashboard();
 refreshBtn.addEventListener('click', renderDashboard);
 setInterval(renderDashboard, 30000);
+
+// Open chart modal when a coin card is clicked
+cryptoContainer.addEventListener('click', (e) => {
+    const card = e.target.closest('.crypto-card');
+    if (!card) return;
+
+    window.openChartModal(
+        card.dataset.pairKey,
+        card.dataset.name,
+        card.dataset.icon,
+        { price: parseFloat(card.dataset.price), changeClass: card.dataset.changeClass }
+    );
+});
